@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -18,6 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   final _toDoController = TextEditingController();
+  final uuid = Uuid();
   List _toDoList = [];
   Map<String, dynamic> _lastRemoved;
   int _lastRemovedIndex;
@@ -34,9 +36,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget buildItem(context, index) {
+  Widget buildItem(BuildContext context, int index) {
     return Dismissible(
-      key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+      key: Key(uuid.v1()),
       background: Container(
         color: Colors.red,
         child: Align(
@@ -183,6 +185,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-
